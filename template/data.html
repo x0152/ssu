@@ -1,0 +1,45 @@
+<script src='http://127.0.0.1:9001/js/socket.js'></script>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>data</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="../../styles/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrapper">
+	<header class="header">
+        <h1>Полученно пактов: {{len .Res}}</h1>
+    </header>
+	<div class="middle">
+
+    {{ range $index, $value := .Res}}
+		<div class="container">
+			<main class="content">
+            <h3>Пакет {{ $index }}</h3>
+            <p>
+                <details>
+                    <summary>
+                       Данные 
+                    </summary>
+                    <h3> {{ $value.Description}}</h3>
+                    {{ if eq $value.Type 0 }}
+                        <p>Текст: {{ printf "%s" $value.Data}}</p>
+                    {{ else if eq $value.Type 1 }}
+                    <p><img src="{{ printf "/tmp/%s" $value.Description}}" alt="Не удалось отобразить изображение!"></p>
+                    {{ else if eq $value.Type 2}}
+                    <p><a href ="{{ printf "/tmp/%s" $value.Description}}" download >{{$value.Description}}</a> </p>
+                    {{ else }}
+                        <p><textarea>{{ $value.Data}}</textarea></p>
+                    {{ end }}
+                </details>
+            </p>
+		</div>
+    {{ end }}
+	</div>
+</div>
+</body>
+</html>

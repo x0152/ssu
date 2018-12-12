@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>client</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="../styles/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrapper">
+	<header class="header">
+        <h1>{{ .Ip }}</h1>
+        <a href="../">Главная</a>
+    </header>
+	<div class="middle">
+		<div class="container">
+			<main class="content">
+            {{ range $key, $value := .Functions.Res}}
+            <a href="execute/?f={{$value.Type}}&id={{$.Id}}"><p title="{{$value.Description}}">{{ printf "%s" $value.Data }}</p></a>
+            {{ end }}
+            <br>
+            </main>
+		</div>
+
+	</div>
+</div>
+
+<footer class="footer"></footer>
+
+</body>
+</html>
